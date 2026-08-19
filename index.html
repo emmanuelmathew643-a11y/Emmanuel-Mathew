@@ -1,76 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>This is my first code</title>
-    <style>
-        img {
-            width: 50%;
-            height: 50%;
-            border-radius: 40%;
-            object-fit: none;
-        }
-        form {
-            width: 30%;
-            padding: 10px;
-            color: rgb(247, 10, 10);
-        }
-        em {
-            text-decoration: underline;
-            color: rgb(255, 38, 0);
-            font-style: italic;
-        }
-        h3 {
-            color: rgb(15, 11, 235);
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My First Functional Website</title>
+
+  <style>
+    :root{
+      --bg:#ffffff; --fg:#111827; --accent:#1e3a8a; --muted:#6b7280;
+      --form-bg:#f8fafc; --success:#065f46;
+    }
+    [data-theme="dark"]{
+      --bg:#0b1220; --fg:#e6eef8; --accent:#60a5fa; --muted:#9ca3af; --form-bg:#071023;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg); color:var(--fg); line-height:1.5;
+    }
+    .container{max-width:900px;margin:0 auto;padding:1rem}
+    a{color:var(--accent)}
+    header{border-bottom:1px solid rgba(0,0,0,0.06);padding:1rem 0}
+    .brand{display:flex;align-items:center;gap:.75rem}
+    .brand h1{font-size:1.1rem;margin:0}
+    nav{margin-top:.75rem}
+    nav ul{display:flex;gap:.5rem;flex-wrap:wrap;padding:0;margin:0;list-style:none}
+    nav a{padding:.4rem .6rem;border-radius:6px;text-decoration:none;color:var(--fg);background:transparent}
+    nav a:hover, nav a:focus{outline:2px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06)}
+
+    .row{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
+    @media(min-width:760px){ .row{grid-template-columns:2fr 1fr} }
+
+    figure{margin:0}
+    img.profile{
+      width:100%; height:auto; border-radius:12px; display:block;
+      object-fit:cover; max-height:320px;
+    }
+
+    section h2{margin-top:0;color:var(--accent)}
+
+    /* Form */
+    form{background:var(--form-bg);padding:1rem;border-radius:8px;border:1px solid rgba(0,0,0,0.04)}
+    label{display:block;font-weight:600;margin-top:.5rem}
+    input[type="text"], input[type="email"], textarea{
+      width:100%; padding:.5rem;border-radius:6px;border:1px solid #d1d5db;margin-top:.25rem;
+      background:transparent;color:var(--fg)
+    }
+    textarea{min-height:100px;resize:vertical}
+    .form-row{display:flex;gap:.5rem;flex-wrap:wrap}
+    .btn{
+      display:inline-block;padding:.5rem .8rem;border-radius:8px;border:0;background:var(--accent);color:white;
+      cursor:pointer;margin-top:.75rem;
+    }
+    .btn:focus{outline:3px solid rgba(37,99,235,.2)}
+    .note{font-size:.9rem;color:var(--muted)}
+    .success{background:rgba(6,95,70,.08);color:var(--success);padding:.6rem;border-radius:6px;margin-top:.5rem}
+
+    footer{margin-top:2rem;padding:1rem 0;border-top:1px solid rgba(0,0,0,0.06);text-align:center;color:var(--muted)}
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{position:static;width:auto;height:auto;padding:.5rem;background:#fff;border:2px solid #000;left:auto}
+    .theme-toggle{margin-left:auto}
+  </style>
 </head>
 <body>
-    <h1>THIS IS MY <em> FIRST CODE</em>!</h1>
-    <h2>This is very important code </h2>
-    <img src="third service.jpg" alt="this is a background picture">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <ol>
-        <li>My first website</li>
-        <li>My second code</li>
-    </ol>
+  <header class="container" role="banner" aria-label="Top of page">
+    <div style="display:flex;align-items:center;gap:1rem">
+      <div class="brand" aria-hidden="true">
+        <img src="third%20service.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:10px">
+        <h1>My First Functional Website</h1>
+      </div>
 
-    <p>For more informations please visit this link below</p>
-    <a href="https://ulk.ac.rw/">click me</a>
+      <!-- Theme toggle -->
+      <div class="theme-toggle" style="margin-left:auto">
+        <button id="themeToggle" class="btn" aria-pressed="false" title="Toggle theme">Toggle theme</button>
+      </div>
+    </div>
 
-    <!-- Correct form -->
-    <form action="more-info.html" method="get">
-        <label for="name">Enter your name:</label>
-        <input type="text" id="name" name="name" required>
-        <br><br>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#learning">Learning HTML</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://ulk.ac.rw/" target="_blank" rel="noopener">University website</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        <label for="email">Enter your email:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
+  <main id="main" class="container" role="main">
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About this project</h2>
+      <div class="row">
+        <div>
+          <p>This is a simple, accessible learning site where I practise HTML, forms, and styling. It includes a functional contact form with validation and a theme toggle for better readability.</p>
 
-        <button type="submit">Submit</button>
-    </form>
+          <h3>Quick features</h3>
+          <ul>
+            <li>Semantic HTML structure (header / nav / main / footer)</li>
+            <li>Accessible form with client-side validation</li>
+            <li>Responsive layout for phones and desktops</li>
+            <li>Descriptive link text and image alt text</li>
+          </ul>
+        </div>
 
-    <h3>Learning HTML</h3>
-    <p>Steps to html </p>
-    <ol>
+        <aside aria-label="Profile image and notes">
+          <figure>
+            <!-- keep original filename but URL-encode spaces -->
+            <img src="third%20service.jpg" alt="Decorative landscape image showing a learning environment" class="profile">
+            <figcaption class="note">A background picture used on the page; consider replacing with a smaller web-optimized image named without spaces (e.g., third-service.jpg).</figcaption>
+          </figure>
+        </aside>
+      </div>
+    </section>
+
+    <section id="learning" aria-labelledby="learning-heading" style="margin-top:1rem">
+      <h2 id="learning-heading">Learning HTML</h2>
+      <p>Short steps to get started:</p>
+      <ol>
         <li>Be patient</li>
-        <li>Be ready to adjust</li>
-        <li>Do practice everytime</li>
-    </ol>
+        <li>Practice regularly</li>
+        <li>Read documentation and try examples</li>
+      </ol>
 
-    <p>For more information about learning html just click the link below </p>
-    <a href="http://www.kevinstratvert.com">Im here</a>
+      <p>More learning resources:</p>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">MDN — HTML documentation</a></li>
+        <li><a href="http://www.kevinstratvert.com" target="_blank" rel="noopener">Web tutorials</a></li>
+      </ul>
+    </section>
 
-    <ul>
-        <li>Teacher</li>
-        <li>Students</li>
-        <li>Everyone else</li>
-    </ul>
+    <section id="resources" aria-labelledby="resources-heading" style="margin-top:1rem">
+      <h2 id="resources-heading">Resources</h2>
+      <p class="note">Useful links for practicing and hosting projects.</p>
+      <ul>
+        <li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages — host your site for free</a></li>
+        <li><a href="https://www.w3.org/WAI/standards-guidelines/" target="_blank" rel="noopener">WAI — Web Accessibility Initiative</a></li>
+      </ul>
+    </section>
 
-    <h4>THIS IS THE LAST PAGE OF THE WEBSITE</h4>
-    <p>This is the last part of learning</p>
-    <a href="https://www.google.com">click</a>
+    <section id="contact" aria-labelledby="contact-heading" style="margin-top:1rem">
+      <h2 id="contact-heading">Contact / Try the form</h2>
+
+      <form id="contactForm" novalidate>
+        <label for="name">Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="name" name="name" required minlength="2" aria-required="true" placeholder="Your full name">
+
+        <label for="email">Email <span aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" required aria-required="true" placeholder="you@example.com">
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me what you are learning or ask a question"></textarea>
+
+        <div class="note">By submitting, your message will be saved locally (this demo uses localStorage). To actually send messages you would connect a server or an email service.</div>
+
+        <button type="submit" class="btn">Send message</button>
+        <div id="formFeedback" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container" role="contentinfo">
+    <p>Built for learning — <a href="https://www.google.com" target="_blank" rel="noopener">search</a> • <a href="https://ulk.ac.rw/" target="_blank" rel="noopener">ULK</a></p>
+    <small>&copy; <span id="year"></span> My Learning Website</small>
+  </footer>
+
+  <script>
+    // small enhancements: theme toggle, form handling and basic validation, and year
+    (function(){
+      const yearEl = document.getElementById('year');
+      yearEl.textContent = new Date().getFullYear();
+
+      const themeButton = document.getElementById('themeToggle');
+      function applyTheme(theme){
+        if(theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
+        else document.documentElement.removeAttribute('data-theme');
+        themeButton.setAttribute('aria-pressed', String(theme === 'dark'));
+      }
+      // restore preference
+      const stored = localStorage.getItem('site-theme') || 'light';
+      applyTheme(stored);
+
+      themeButton.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('site-theme', next);
+        applyTheme(next);
+      });
+
+      // form handling
+      const form = document.getElementById('contactForm');
+      const feedback = document.getElementById('formFeedback');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // simple validation
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+
+        if (name.length < 2) {
+          feedback.innerHTML = '<div class="note" style="color:crimson">Please enter a name with at least 2 characters.</div>';
+          form.name.focus();
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          feedback.innerHTML = '<div class="note" style="color:crimson">Please enter a valid email address.</div>';
+          form.email.focus();
+          return;
+        }
+
+        // save to localStorage as demo (replace with server call to make it real)
+        try {
+          const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+          messages.push({
+            name, email, message: form.message.value.trim(), createdAt: new Date().toISOString()
+          });
+          localStorage.setItem('messages', JSON.stringify(messages));
+        } catch (err) {
+          // ignore
+        }
+
+        feedback.innerHTML = '<div class="success">Thanks — your message is saved (demo). You can clear it from browser storage if needed.</div>';
+        form.reset();
+      });
+    })();
+  </script>
 </body>
 </html>
